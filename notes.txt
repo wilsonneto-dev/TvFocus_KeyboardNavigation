@@ -1,0 +1,6 @@
+Icons:
+
+sports: https://wilsonneto-dev-s3-01.s3.us-east-2.amazonaws.com/ic-football.png
+movies: https://wilsonneto-dev-s3-01.s3.us-east-2.amazonaws.com/ic-movies.png
+netflix: https://wilsonneto-dev-s3-01.s3.us-east-2.amazonaws.com/ic-netflix.png
+youtube: https://wilsonneto-dev-s3-01.s3.us-east-2.amazonaws.com/ic-youtube.png

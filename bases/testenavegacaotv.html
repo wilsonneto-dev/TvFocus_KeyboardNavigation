@@ -1,0 +1,123 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style>
+body{
+	margin:0;
+	padding:0;
+}
+.block{
+    opacity: 0.3;
+	margin: 10px;
+}
+.selectedBlock {
+    opacity: 1;
+}
+.box{
+	box-sizing: border-box;
+	width: 50px;
+	height: 100px;
+	background-color: #f00;
+	display: inline-block;
+}
+.selectedBox{
+    border: 10px solid #00f;
+}
+
+
+</style>
+
+<div class="block selectedBlock" data-endbase="1" data-endright="2">
+	<div class="line">
+		<div class="box selectedBox"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="line">
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="line">
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+</div>
+<div class="block" data-endtop="0" data-focusout="outBlock" data-paramout="Saiu" style="position: absolute; left:0px; bottom:0px;">
+	<div class="line">
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="line">
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+</div>
+<div class="block" data-endleft="0" data-endbase="1" data-focusin="inBlock" data-paramin="Entrou" style="position: absolute; right:0px; top:0px;">
+	<div class="line">
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="line">
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+</div>
+
+<script>
+	function inBlock(param){
+		console.log(param)
+	}
+	function outBlock(param){
+		console.log(param)
+	}
+</script>
+
+ 
+<script>
+	var block = 0;
+	var column = 0;
+	var row = 0;
+
+	function focusDefinition(blockIndex, rowIndex, columnIndex){
+		block = blockIndex;
+		row = rowIndex<0 ? $(".block").eq(blockIndex).find(".line").length -1 : rowIndex;
+		column = columnIndex<0 ? $(".block").eq(blockIndex).find(".line").eq(rowIndex).find(".box").length -1 : columnIndex;
+		$(".block").removeClass("selectedBlock");
+		$(".line").find("div").removeClass("selectedBox");
+		$(".block").eq(block).addClass("selectedBlock");
+		$(".block").eq(block).find(".line").eq(row).find(".box").eq(column).addClass("selectedBox");
+	}
+	function changeFocus(blockIndex, rowIndex, columnIndex, direction, newRow, newColumn){
+		existNextElement = (rowIndex<0 || columnIndex<0) ? false : verifyFocus(blockIndex, rowIndex, columnIndex);
+		if(!existNextElement){
+			newBlock = $(".block").eq(blockIndex).data(direction);
+			if(newBlock != undefined){
+				rows = $(".block").eq(newBlock).find(".line").length - 1;
+				if(rows < newRow) newRow = rows;
+				columns = $(".block").eq(newBlock).find(".line").eq(newRow).find(".box").length - 1;
+				if(columns < newColumn) newColumn = columns;
+				if(newBlock != blockIndex){
+					var scope = window;
+					functionIn = $(".block").eq(newBlock).data("focusin");
+					functionOut = $(".block").eq(blockIndex).data("focusout"); 
+					if(functionIn != undefined) scope[functionIn]($(".block").eq(newBlock).data("paramin"));
+					if(functionOut != undefined) scope[functionOut]($(".block").eq(blockIndex).data("paramout"));
+				}
+				focusDefinition(newBlock, newRow, newColumn);
+			}
+		}
+		else focusDefinition(blockIndex, rowIndex, columnIndex);
+		return existNextElement;
+	}
+	function verifyFocus(blockIndex, rowIndex, columnIndex){
+		return $(".block").eq(blockIndex).find(".line").eq(rowIndex).find(".box").eq(columnIndex).length > 0 ? true : false;
+	}
+	
+	$(document).keydown(function(e){
+		switch(e.keyCode){
+			case 40: (changeFocus(block, row+1, column, "endbase", 0, column)); break;
+			case 39: (changeFocus(block, row, column+1, "endright", row, 0)); break;
+			case 38: (changeFocus(block, row-1, column, "endtop", -1, column)); break;
+			case 37: (changeFocus(block, row, column-1, "endleft", row, -1)); break;
+		}
+	});
+</script>

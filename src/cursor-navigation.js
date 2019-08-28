@@ -17,5 +17,4 @@ class Cursor {
   move() {
     return this.navItem;
   }
-
 }

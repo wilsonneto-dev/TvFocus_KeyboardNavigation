@@ -3,25 +3,20 @@
   "version": "1.0.0",
   "description": "My webpack project",
   "main": "index.js",
-
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "start": "webpack-dev-server"
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wilsonneto-dev/Tv_Optimized_UI_01.git"
   },
-
   "author": "",
   "license": "ISC",
-
   "bugs": {
     "url": "https://github.com/wilsonneto-dev/Tv_Optimized_UI_01/issues"
   },
-
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",

@@ -1,3 +1,4 @@
-import * as Nav from './cursor-navigation';
+/* eslint-disable no-unused-vars */
+import ItemNavigation, * as Nav from './Navigation/ItemNavigation.js';
 
-Nav.default();
+let n = new ItemNavigation();

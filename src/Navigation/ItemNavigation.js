@@ -12,23 +12,27 @@ class ItemNavigation {
     this.ui = null;
 
     this.events = new EventHandler();
-    // own events: focusin, focusout, updateui
-    // child events: child-focusin, child-focusout, child-updateui
+    // own events: cursorin, cursorout (this/item, direction, cursor)
+    // child events: child_cursorin, child_cursorout, child_updateui
+    // hit (direction, cursor)
+    // updateui (this/item)
   }
 
-  focusIn(direction, cursor) {
+  cursorIn(direction, cursor) {
     this.active = true;
-    this.events.trigger('focusin', [this, direction, cursor]);
+    this.triggerEvent('cursorin', [this, direction, cursor]);
+    return this;
   }
 
-  focusOut(direction, cursor) {
+  cursorOut(direction, cursor) {
     this.active = false;
-    this.events.trigger('focusout', [this, direction, cursor]);
+    this.triggerEvent('cursorout', [this, direction, cursor]);
+    return this;
   }
 
   uptadeUI() {
-    this.executeCallbacksInArray(this.onUpdateUiCallbacks);
-    this.events.trigger('updateui', []);
+    this.triggerEvent('updateui', [this]);
+    return this;
   }
 
   triggerEvent(trigger, parameters = []) {
@@ -38,18 +42,44 @@ class ItemNavigation {
     let parentIterator = this.parent;
 
     do {
-      parentIterator.events.trigger(`child-${trigger}`, [level, ...parameters]);
+      parentIterator.events.trigger(`child_${trigger}`, [level, ...parameters]);
       level += 1;
       parentIterator = parentIterator.parent;
     } while (parentIterator != null);
   }
 
-  next() {
-    return 'next...';
+  next(direction, item = null, directionReverse = null) {
+    // if item passed, put it in direction
+    if (item != null) this.neighborhood[`n${direction}`] = item;
+
+    // if directionReverse put this in the position of item passed here
+    if (directionReverse != null) item.next(directionReverse, this);
+
+    return this.neighborhood[`n${direction}`] || null;
+  }
+
+  nextParentsRecursive(direction) {
+    let prevParent = this.parent;
+    let nextParent = null;
+    do {
+      // search for the next parent node
+      prevParent = prevParent.parent;
+      nextParent = prevParent.next(direction);
+    } while (prevParent != null && nextParent == null);
+    return [nextParent, prevParent];
+  }
+
+  firstChildRecursive() {
+    let iteratorItem = this;
+    while (iteratorItem.childs.length > 0) {
+      // eslint-disable-next-line prefer-destructuring
+      [iteratorItem] = iteratorItem.childs;
+    }
+    return iteratorItem;
   }
 
   action() {
-    return 'action...';
+    this.triggerEvent('action', []);
   }
 }
 

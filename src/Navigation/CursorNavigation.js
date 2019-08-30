@@ -1,6 +1,6 @@
 /* eslint-disable import/extensions */
 /* eslint-disable class-methods-use-this */
-import EventHandler from './EventHandler.js';
+import EventHandler from '../EventHandler/EventHandler.js';
 
 class CursorNavigation {
   constructor() {
@@ -18,7 +18,7 @@ class CursorNavigation {
     if (nextItem == null) {
       // search a parent that has a next element in this direction
       const [nextParent, prevParent] = prevItem.nextParentsRecursive(direction);
-      nextItem = nextParent.firstChildRecursive();
+      if (nextParent != null) nextItem = nextParent.firstChildRecursive();
       if (nextItem != null) {
         nextParent.active = true;
         prevParent.active = false;

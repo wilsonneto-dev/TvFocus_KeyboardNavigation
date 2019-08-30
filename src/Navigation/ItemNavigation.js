@@ -1,6 +1,6 @@
 /* eslint-disable import/extensions */
 /* eslint-disable class-methods-use-this */
-import EventHandler from './EventHandler.js';
+import EventHandler from '../EventHandler/EventHandler.js';
 
 class ItemNavigation {
   constructor() {
@@ -36,10 +36,12 @@ class ItemNavigation {
   }
 
   triggerEvent(trigger, parameters = []) {
-    this.events.trigger('updateui', parameters);
+    this.events.trigger(trigger, parameters);
 
+    // parents propagation
     let level = 1;
     let parentIterator = this.parent;
+    if (parentIterator == null) return;
 
     do {
       parentIterator.events.trigger(`child_${trigger}`, [level, ...parameters]);
@@ -61,10 +63,11 @@ class ItemNavigation {
   nextParentsRecursive(direction) {
     let prevParent = this.parent;
     let nextParent = null;
+
     do {
       // search for the next parent node
-      prevParent = prevParent.parent;
       nextParent = prevParent.next(direction);
+      prevParent = prevParent.parent;
     } while (prevParent != null && nextParent == null);
     return [nextParent, prevParent];
   }

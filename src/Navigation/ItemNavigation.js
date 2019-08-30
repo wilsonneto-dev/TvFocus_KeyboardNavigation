@@ -1,6 +1,6 @@
 /* eslint-disable import/extensions */
 /* eslint-disable class-methods-use-this */
-import EventHandler from './EventHandler.js';
+import EventHandler from '../EventHandler/EventHandler.js';
 
 class ItemNavigation {
   constructor() {
@@ -12,26 +12,25 @@ class ItemNavigation {
     this.ui = null;
 
     this.events = new EventHandler();
-    // own events: focusin, focusout, updateui
-    // child events: child-focusin, child-focusout, child-updateui
+    // own events: focusin, focusout, updateui,
+    // child events: child-focusin, child-focusout, child-updateui, child-action
   }
 
   focusIn(direction, cursor) {
     this.active = true;
-    this.events.trigger('focusin', [this, direction, cursor]);
+    this.eventTrigger('focusin', [this, direction, cursor]);
   }
 
   focusOut(direction, cursor) {
     this.active = false;
-    this.events.trigger('focusout', [this, direction, cursor]);
+    this.eventTrigger('focusout', [this, direction, cursor]);
   }
 
-  uptadeUI() {
-    this.executeCallbacksInArray(this.onUpdateUiCallbacks);
-    this.events.trigger('updateui', []);
+  uptadeUI(direction, cursor) {
+    this.eventTrigger('updateui', [this, direction, cursor]);
   }
 
-  triggerEvent(trigger, parameters = []) {
+  eventTrigger(trigger, parameters = []) {
     this.events.trigger('updateui', parameters);
 
     let level = 1;
@@ -44,12 +43,16 @@ class ItemNavigation {
     } while (parentIterator != null);
   }
 
-  next() {
-    return 'next...';
+  next(direction, item = null) {
+    if (item != null) {
+      // putting item
+      this.neighborhood[`n${direction}`] = item;
+    } 
+    return this.neighborhood[`n${direction}`] || null;
   }
 
   action() {
-    return 'action...';
+    this.eventTrigger('action', []);
   }
 }
 

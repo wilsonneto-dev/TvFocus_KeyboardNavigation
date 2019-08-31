@@ -1,23 +1,11 @@
 /* eslint-disable import/extensions */
-<<<<<<< HEAD
-// eslint-disable-next-line no-unused-vars
-import Directions from './Directions';
-=======
 /* eslint-disable class-methods-use-this */
->>>>>>> 41cc32f992cde1fdf02b907c62295a39a72ab0c2
 import EventHandler from '../EventHandler/EventHandler.js';
 
 class CursorNavigation {
   constructor() {
     this.currentItem = null;
     this.events = new EventHandler();
-<<<<<<< HEAD
-  }
-
-  move(direction) {
-    this.events.trigger('move', [this, direction, this.currentItem])
-    return this.navItem;
-=======
     // events: moved (nextItem, prevItem, cursor/this, direction)
     // events: parents_moved (nextParent, prevParent, nextItem, prevItem, cursor/this, direction)
     // events: hit (currentItem, direction)
@@ -55,7 +43,6 @@ class CursorNavigation {
       this.events.trigger('hit', [prevItem, direction]);
       this.currentItem.triggerEvent('hit', [direction, this]);
     }
->>>>>>> 41cc32f992cde1fdf02b907c62295a39a72ab0c2
   }
 }
 

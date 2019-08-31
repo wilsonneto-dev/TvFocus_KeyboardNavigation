@@ -1,0 +1,14 @@
+.parent-list-footer {
+    text-align: center;
+}
+    .parent-list-footer .item {
+        display: inline-block;
+        width: 200px;
+        height: 200px;
+        background-color: #994499;
+        box-sizing: border-box;  
+    }
+
+    .active {
+        border: 5px solid green;
+    }

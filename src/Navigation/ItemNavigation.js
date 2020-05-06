@@ -12,31 +12,23 @@ class ItemNavigation {
     this.ui = null;
 
     this.events = new EventHandler();
-<<<<<<< HEAD
-    // own events: focusin, focusout, updateui,
-    // child events: child-focusin, child-focusout, child-updateui, child-action
-=======
     // own events: cursorin, cursorout (this/item, direction, cursor)
-    // child events: child_cursorin, child_cursorout, child_updateui
+    // child events: child-focusin, child-focusout, child-updateui, child-action
     // hit (direction, cursor)
     // updateui (this/item)
->>>>>>> 41cc32f992cde1fdf02b907c62295a39a72ab0c2
   }
 
   cursorIn(direction, cursor) {
     this.active = true;
-<<<<<<< HEAD
-    this.eventTrigger('focusin', [this, direction, cursor]);
-=======
+    // this.eventTrigger('focusin', [this, direction, cursor]);
     this.triggerEvent('cursorin', [this, direction, cursor]);
     return this;
->>>>>>> 41cc32f992cde1fdf02b907c62295a39a72ab0c2
   }
 
   cursorOut(direction, cursor) {
     this.active = false;
-<<<<<<< HEAD
     this.eventTrigger('focusout', [this, direction, cursor]);
+    return this;
   }
 
   uptadeUI(direction, cursor) {
@@ -45,8 +37,7 @@ class ItemNavigation {
 
   eventTrigger(trigger, parameters = []) {
     this.events.trigger('updateui', parameters);
-=======
-    this.triggerEvent('cursorout', [this, direction, cursor]);
+    this.triggerEvent('cursorout', parameters);
     return this;
   }
 
@@ -57,7 +48,6 @@ class ItemNavigation {
 
   triggerEvent(trigger, parameters = []) {
     this.events.trigger(trigger, parameters);
->>>>>>> 41cc32f992cde1fdf02b907c62295a39a72ab0c2
 
     // parents propagation
     let level = 1;
@@ -71,18 +61,10 @@ class ItemNavigation {
     } while (parentIterator != null);
   }
 
-<<<<<<< HEAD
-  next(direction, item = null) {
-    if (item != null) {
-      // putting item
-      this.neighborhood[`n${direction}`] = item;
-    } 
-    return this.neighborhood[`n${direction}`] || null;
-  }
-
   action() {
     this.eventTrigger('action', []);
-=======
+  }
+
   next(direction, item = null, directionReverse = null) {
     // if item passed, put it in direction
     if (item != null) this.neighborhood[`n${direction}`] = item;
@@ -116,7 +98,6 @@ class ItemNavigation {
 
   action() {
     this.triggerEvent('action', []);
->>>>>>> 41cc32f992cde1fdf02b907c62295a39a72ab0c2
   }
 }
 

@@ -13,11 +13,10 @@ window.addEventListener('keydown', (e) => {
     cursorNavigation.move(e.keyCode);
   }
 
-  if(e.keyCode == 13){
+  if (e.keyCode == 13) {
     e.preventDefault();
     cursorNavigation.currentItem.action();
   }
-
 });
 
 // settings in UI
@@ -41,9 +40,7 @@ cursorNavigation.currentItem.active = 1;
 cursorNavigation.currentItem.uptadeUI();
 
 cursorNavigation.events.on('moved', (currentItem, prevItem) => {
-
   currentItem.ui.classList.add('active');
   prevItem.ui.classList.remove('active');
-  currentItem.parent.ui.style.backgroundColor = '#909090';
-
+  // currentItem.parent.ui.style.backgroundColor = '#909090';
 });

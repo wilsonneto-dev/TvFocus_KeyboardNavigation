@@ -12,7 +12,7 @@ class EventHandler {
     // console.log(trigger);
     const callbacks = this.callbacks[trigger] || [];
     callbacks.forEach((f) => {
-      f.bind((parameters[0] || null), ...parameters).call();
+      f.bind(parameters[0] || null, ...parameters).call();
     });
   }
 }

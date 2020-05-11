@@ -15,21 +15,31 @@ class CursorNavigation {
     const prevItem = this.currentItem;
     let nextItem = this.currentItem.next(direction);
 
-    if (nextItem == null) {
+    if (nextItem === null) {
       // search a parent that has a next element in this direction
       const [nextParent, prevParent] = prevItem.nextParentsRecursive(direction);
+
       if (nextParent != null) nextItem = nextParent.firstChildRecursive();
+
       if (nextItem != null) {
         nextParent.active = true;
         prevParent.active = false;
         // parents trigers
         nextParent.cursorIn(direction, this).uptadeUI();
         prevParent.cursorOut(direction, this).uptadeUI();
-        this.events.trigger('parents_moved', [nextParent, prevParent, nextItem, prevItem, this, direction]);
+        this.events.trigger('parents_moved', [
+          nextParent,
+          prevParent,
+          nextItem,
+          prevItem,
+          this,
+          direction,
+        ]);
       }
     }
 
-    if (nextItem != null) {
+    if (nextItem !== null) {
+      nextItem = nextItem.firstChildRecursive();
       // eslint-disable-next-line no-use-before-define
       this.currentItem = nextItem;
       prevItem.active = false;

@@ -1,14 +1,89 @@
-.parent-list-footer {
-    text-align: center;
+body {
+  padding: 0;
+  margin: 0;
 }
-    .parent-list-footer .item {
-        display: inline-block;
-        width: 200px;
-        height: 200px;
-        background-color: #994499;
-        box-sizing: border-box;  
-    }
 
-    .active {
-        border: 5px solid green;
-    }
+.list {
+  margin-left: 70px;
+}
+.list .item {
+  display: inline-block;
+  width: calc(156px * 1.2);
+  height: calc(226px * 1.2);
+  background-color: #994499;
+  box-sizing: border-box;
+}
+
+.item.nv-active {
+  background-color: #792479;
+  border: 5px solid #490449;
+}
+
+.main-navigation {
+  display: flex;
+  background-color: #333;
+  width: 55px;
+  overflow: hidden;
+  opacity: 0.4;
+  position: fixed;
+  height: 100vh;
+  transition: all 0.5s;
+  justify-items: center;
+  align-items: center;
+}
+.main-navigation.nv-active {
+  opacity: 0.9;
+  width: 300px;
+}
+.main-navigation .nv-active {
+  background-color: red;
+}
+
+nav,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: sans-serif;
+}
+
+.main-navigation nav {
+  width: 100%;
+}
+.main-navigation li {
+  display: flex;
+  align-items: center;
+  margin: 0 0 5px;
+}
+
+.main-navigation img {
+  width: 35px;
+  margin: 5px 10px;
+}
+
+.banner {
+  padding-top: 10px;
+}
+
+.banner .inner {
+  width: 800px;
+  height: 130px;
+  background-color: #994499;
+  margin-left: 70px;
+  margin-bottom: 20px;
+}
+
+.button {
+  background-color: rgba(0, 0, 0, 0.4);
+  display: inline-block;
+  padding: 10px;
+}
+.button.nv-active {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+}
+
+.buttons {
+  text-align: right;
+}

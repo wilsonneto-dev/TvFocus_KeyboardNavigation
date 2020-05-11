@@ -1,23 +1,76 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Cursor Navigation test</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div nv-parent>
+      <div nv-parent nv-direction="vertical" class="main-navigation">
+        <nav>
+          <ul>
+            <li nv-item>
+              <img
+                src="https://wilsonneto-dev-s3-01.s3.us-east-2.amazonaws.com/ic-football.png"
+                alt="Item 1"
+              />
+              Esportes
+            </li>
+            <li nv-item>
+              <img
+                src="https://wilsonneto-dev-s3-01.s3.us-east-2.amazonaws.com/ic-movies.png"
+                alt="Item 2"
+              />
+              Fimes
+            </li>
+            <li nv-item>
+              <img
+                src="https://wilsonneto-dev-s3-01.s3.us-east-2.amazonaws.com/ic-netflix.png"
+                alt="Item 3"
+              />
+              Netflix
+            </li>
+            <li nv-item>
+              <img
+                src="https://wilsonneto-dev-s3-01.s3.us-east-2.amazonaws.com/ic-youtube.png"
+                alt="Item 4"
+              />
+              Youtube
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div nv-parent nv-direction="vertical">
+        <div class="banner" nv-parent>
+          <div class="inner">
+            Exemplo de Banner
+            <div class="buttons">
+              <div class="button" nv-item>Botão 1</div>
+              <div class="button" nv-item>Botão 2</div>
+            </div>
+          </div>
+        </div>
 
-    <div class="parent-list-footer">
-        <div class="item active"></div>
-        <div class="item"></div>
-        <div class="item"></div>
-        <div class="item"></div>
-        <div class="item"></div>
+        <div class="list" nv-parent>
+          <div class="item" nv-item></div>
+          <div class="item" nv-item></div>
+          <div class="item" nv-item></div>
+          <div class="item" nv-item></div>
+          <div class="item" nv-item></div>
+        </div>
+
+        <div class="list" nv-parent>
+          <div class="item" nv-item></div>
+          <div class="item" nv-item></div>
+          <div class="item" nv-item></div>
+          <div class="item" nv-item></div>
+          <div class="item" nv-item></div>
+        </div>
+      </div>
     </div>
-    
     <script src="./index.js" type="module"></script>
-</body>
+  </body>
 </html>
